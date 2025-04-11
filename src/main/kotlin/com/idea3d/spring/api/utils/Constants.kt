@@ -10,5 +10,8 @@ class Constants {
         //Base API endpoint para Tasks
         const val URL_BASE_TASK = "$URL_BASE/tasks"
 
+        //Base API endpoint para Makes
+        const val URL_BASE_MAKE = "$URL_BASE/makes"
+
     }
 }
