@@ -2,7 +2,6 @@ package com.idea3d.spring.api
 
 import com.idea3d.spring.api.dao.MakeRepository
 import com.idea3d.spring.api.model.Make
-import com.idea3d.spring.api.model.Task
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication

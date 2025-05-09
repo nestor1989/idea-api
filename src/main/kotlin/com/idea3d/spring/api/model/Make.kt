@@ -16,10 +16,3 @@ data class Make(
     val updatedAt: Long,
     val ranking: Int
     )
-
-data class Pagination(
-    val page: Int,
-    val limit: Int,
-    val pageCount: Int,
-    val totalCount: Int
-)

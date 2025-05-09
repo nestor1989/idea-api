@@ -2,6 +2,7 @@ package com.idea3d.spring.api.web
 
 import com.idea3d.spring.api.bussiness.iMakeBusiness
 import com.idea3d.spring.api.model.Make
+import com.idea3d.spring.api.model.PaginatedResponse
 import com.idea3d.spring.api.utils.Constants
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,9 +14,9 @@ import org.springframework.web.server.ResponseStatusException
 class MakeRestController(private val makeBusiness: iMakeBusiness) {
 
     @GetMapping
-    fun listAllMakes(): ResponseEntity<List<Make>> {
+    fun listAllMakes(): ResponseEntity<PaginatedResponse<Make>> {
         return try {
-            val makes = makeBusiness.listMakes()
+            val makes = makeBusiness.listMakes(1, 10)
             ResponseEntity.ok(makes)
         } catch (e: Exception) {
             // Error genérico: se devuelve un estado HTTP 500

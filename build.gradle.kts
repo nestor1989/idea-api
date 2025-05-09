@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.idea3d.spring"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -36,3 +36,9 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.named<Jar>("jar") {
+	archiveBaseName.set("idea-api")
+	archiveVersion.set("")
+}
+
