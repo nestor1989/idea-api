@@ -7,6 +7,7 @@ import com.idea3d.spring.api.utils.Constants
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
@@ -38,13 +39,34 @@ class MakeRestController(private val makeBusiness: iMakeBusiness) {
         }
     }
 
-    @PostMapping
-    fun createMake(@RequestBody make: Make): ResponseEntity<Make> {
+    @PostMapping("/upload")
+    fun uploadMake(
+        @RequestParam("image") image: MultipartFile,
+        @RequestParam("userId") userId: String,
+        @RequestParam("title") title: String,
+        @RequestParam("description") description: String?,
+        @RequestParam("userProfileImage") userProfileImage: String
+    ): ResponseEntity<Make> {
         return try {
-            val createdMake = makeBusiness.saveMake(make)
-            ResponseEntity.status(HttpStatus.CREATED).body(createdMake) // 201 Created
+            // Guardar la imagen en el servidor
+            val imagePath = makeBusiness.saveImage(image)
+
+            // Crear y guardar el objeto Make
+            val make = Make(
+                id = 0, // Será generado automáticamente
+                userId = userId,
+                userProfileImage = userProfileImage,
+                imageLink = imagePath,
+                title = title,
+                description = description ?: "",
+                createdAt = System.currentTimeMillis(),
+                updatedAt = System.currentTimeMillis(),
+                ranking = 0
+            )
+            val savedMake = makeBusiness.saveMake(make)
+
+            ResponseEntity.status(HttpStatus.CREATED).body(savedMake)
         } catch (e: Exception) {
-            // Error genérico: 500 Internal Server Error
             ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null)
         }
     }

@@ -23,37 +23,34 @@ class ApiApplication: CommandLineRunner{
 	fun mockMakesList(): List<Make> {
 		return listOf(
 			Make(
-				id = 1,
+				id = 0, // Será autogenerado
 				userId = "user123",
 				userProfileImage = "https://example.com/images/profile1.png",
-				imageLink = "https://example.com/images/make1.png",
+				imageLink = "/uploads/images/make1.png",
 				title = "Proyecto 1",
 				description = "Descripción del proyecto 1.",
 				createdAt = System.currentTimeMillis(),
-				updatedAt = System.currentTimeMillis(),
-				ranking = 4
+				updatedAt = System.currentTimeMillis()
 			),
 			Make(
-				id = 2,
+				id = 0, // Será autogenerado
 				userId = "user456",
 				userProfileImage = "https://example.com/images/profile2.png",
-				imageLink = "https://example.com/images/make2.png",
+				imageLink = "/uploads/images/make2.png",
 				title = "Proyecto 2",
 				description = "Descripción del proyecto 2.",
 				createdAt = System.currentTimeMillis() - 86400000, // Hace un día
-				updatedAt = System.currentTimeMillis(),
-				ranking = 3
+				updatedAt = System.currentTimeMillis()
 			),
 			Make(
-				id = 3,
+				id = 0, // Será autogenerado
 				userId = "user789",
 				userProfileImage = "https://example.com/images/profile3.png",
-				imageLink = "https://example.com/images/make3.png",
+				imageLink = "/uploads/images/make3.png",
 				title = "Proyecto 3",
-				description = null, // Sin descripción
+				description = "okkskds", // Sin descripción
 				createdAt = System.currentTimeMillis() - 172800000, // Hace dos días
-				updatedAt = System.currentTimeMillis(),
-				ranking = 5
+				updatedAt = System.currentTimeMillis()
 			)
 		)
 	}
