@@ -25,7 +25,7 @@ class ApiApplication: CommandLineRunner{
 			Make(
 				id = 0, // Será autogenerado
 				userId = "user123",
-				userProfileImage = "https://example.com/images/profile1.png",
+				userImageProfile = "https://example.com/images/profile1.png",
 				imageLink = "/uploads/images/make1.png",
 				title = "Proyecto 1",
 				description = "Descripción del proyecto 1.",
@@ -35,7 +35,7 @@ class ApiApplication: CommandLineRunner{
 			Make(
 				id = 0, // Será autogenerado
 				userId = "user456",
-				userProfileImage = "https://example.com/images/profile2.png",
+				userImageProfile = "https://example.com/images/profile2.png",
 				imageLink = "/uploads/images/make2.png",
 				title = "Proyecto 2",
 				description = "Descripción del proyecto 2.",
@@ -45,7 +45,7 @@ class ApiApplication: CommandLineRunner{
 			Make(
 				id = 0, // Será autogenerado
 				userId = "user789",
-				userProfileImage = "https://example.com/images/profile3.png",
+				userImageProfile = "https://example.com/images/profile3.png",
 				imageLink = "/uploads/images/make3.png",
 				title = "Proyecto 3",
 				description = "okkskds", // Sin descripción

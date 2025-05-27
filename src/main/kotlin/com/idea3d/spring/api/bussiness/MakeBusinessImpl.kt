@@ -4,17 +4,23 @@ import com.idea3d.spring.api.dao.MakeRepository
 import com.idea3d.spring.api.model.Make
 import com.idea3d.spring.api.model.PaginatedResponse
 import com.idea3d.spring.api.model.Pagination
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.io.Resource
+import org.springframework.core.io.UrlResource
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.*
 
+
 @Service
 class MakeBusinessImpl(private val makeRepository: MakeRepository) : iMakeBusiness {
-
+    @Value("D:\\SpringBoot\\images")
+    lateinit var uploadDir: String
     override fun listMakes(page: Int, size: Int): PaginatedResponse<Make> {
         val pageable = PageRequest.of(page-1, size)
         val pageResult = makeRepository.findAll(pageable)
@@ -41,19 +47,20 @@ class MakeBusinessImpl(private val makeRepository: MakeRepository) : iMakeBusine
     override fun saveMake(make: Make): Make {
         return makeRepository.save(make)
     }
-    override fun saveImage(image: MultipartFile): String {
-        val uploadDir = "uploads/images/"
-        val fileName = System.currentTimeMillis().toString() + "_" + image.originalFilename
-        val filePath = Paths.get(uploadDir, fileName)
+    override fun saveImage(image: MultipartFile): UrlResource {
+        val uploadPath: Path = Paths.get(uploadDir)
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath)
+        }
 
-        // Crear el directorio si no existe
-        Files.createDirectories(filePath.parent)
-
-        // Guardar el archivo
+        val fileName: String? = image.originalFilename
+        val filePath: Path = uploadPath.resolve(fileName!!)
         Files.copy(image.inputStream, filePath, StandardCopyOption.REPLACE_EXISTING)
 
-        // Devolver la ruta relativa
-        return "/$uploadDir$fileName"
+        val finalPath: Path = Paths.get(uploadDir).resolve(filePath.toString())
+        val resource = UrlResource(finalPath.toUri())
+
+        return resource
     }
 
 

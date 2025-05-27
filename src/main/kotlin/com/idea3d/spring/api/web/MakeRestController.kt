@@ -4,6 +4,7 @@ import com.idea3d.spring.api.bussiness.iMakeBusiness
 import com.idea3d.spring.api.model.Make
 import com.idea3d.spring.api.model.PaginatedResponse
 import com.idea3d.spring.api.utils.Constants
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -45,7 +46,7 @@ class MakeRestController(private val makeBusiness: iMakeBusiness) {
         @RequestParam("userId") userId: String,
         @RequestParam("title") title: String,
         @RequestParam("description") description: String?,
-        @RequestParam("userProfileImage") userProfileImage: String
+        @RequestParam("userImageProfile") userImageProfile: String
     ): ResponseEntity<Make> {
         return try {
             // Guardar la imagen en el servidor
@@ -55,8 +56,8 @@ class MakeRestController(private val makeBusiness: iMakeBusiness) {
             val make = Make(
                 id = 0, // Será generado automáticamente
                 userId = userId,
-                userProfileImage = userProfileImage,
-                imageLink = imagePath,
+                userImageProfile = userImageProfile,
+                imageLink = imagePath.uri.path,
                 title = title,
                 description = description ?: "",
                 createdAt = System.currentTimeMillis(),

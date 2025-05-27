@@ -8,11 +8,12 @@ data class Make(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
     val userId: String,
-    val userProfileImage: String,
+    val userImageProfile: String,
     val imageLink: String,
     val title: String,
     val description: String,
     val createdAt: Long?,
     val updatedAt: Long?,
-    val ranking: Int = 0
+    val ranking: Int = 0,
+
     )
